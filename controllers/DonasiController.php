@@ -58,5 +58,17 @@ class DonasiController {
 
         jsonResponse(["message"=>"error"],500);
     }
+    public function adminList(){
+
+    $result = $this->donasi->getAll();
+
+    $data = [];
+
+    while($row = $result->fetch_assoc()){
+        $data[] = $row;
+    }
+
+    jsonResponse($data);
+}
 
 }

@@ -45,6 +45,12 @@ if($uri === "/api/donasi/confirm" && $method === "POST"){
 if($uri === "/api/admin/login" && $method === "POST"){
     $adminController->login();
 }
+if($uri === "/api/admin/donasi" && $method === "GET"){
+
+    authMiddleware();
+
+    $donasiController->adminList();
+}
 
 
 /*

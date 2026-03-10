@@ -42,4 +42,12 @@ class Donasi {
         return $stmt->execute();
     }
 
+    public function getAll(){
+
+    $sql = "SELECT * FROM $this->table
+            ORDER BY created_at DESC";
+
+    return $this->conn->query($sql);
+    }
+
 }
