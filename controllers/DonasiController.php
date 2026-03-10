@@ -2,6 +2,7 @@
 
 require_once __DIR__.'/../models/Donasi.php';
 require_once __DIR__.'/../helpers/response.php';
+require_once __DIR__.'/../helpers/validator.php';
 
 class DonasiController {
 
@@ -13,19 +14,26 @@ class DonasiController {
 
     public function create(){
 
-        $data = json_decode(file_get_contents("php://input"),true);
+    $data = json_decode(file_get_contents("php://input"),true);
 
-        $nama = $data['nama'];
-        $wa = $data['no_wa'];
-        $doa = $data['doa'];
-        $nominal = $data['nominal'];
+    validate($data,[
+        "nama" => "required|string",
+        "no_wa" => "required|string",
+        "doa" => "string",
+        "nominal" => "required|number"
+    ]);
 
-        if($this->donasi->create($nama,$wa,$doa,$nominal)){
-            jsonResponse(["message"=>"donasi berhasil"]);
-        }
+    $nama = $data['nama'];
+    $wa = $data['no_wa'];
+    $doa = $data['doa'];
+    $nominal = $data['nominal'];
 
-        jsonResponse(["message"=>"gagal"],500);
+    if($this->donasi->create($nama,$wa,$doa,$nominal)){
+        jsonResponse(["message"=>"donasi berhasil"]);
     }
+
+    jsonResponse(["message"=>"gagal"],500);
+}
 
     public function list(){
 
