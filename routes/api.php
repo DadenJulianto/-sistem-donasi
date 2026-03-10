@@ -3,10 +3,13 @@
 require_once __DIR__.'/../config/database.php';
 require_once __DIR__.'/../controllers/DonasiController.php';
 require_once __DIR__.'/../helpers/response.php';
+require_once __DIR__.'/../controllers/AdminController.php';
+
+
 
 $db = (new Database())->connect();
 $donasiController = new DonasiController($db);
-
+$adminController = new AdminController($db);
 /*
 ambil path saja tanpa query string
 */
@@ -37,6 +40,9 @@ if($uri === "/api/donasi" && $method === "GET"){
 
 if($uri === "/api/donasi/confirm" && $method === "POST"){
     $donasiController->confirm();
+}
+if($uri === "/api/admin/login" && $method === "POST"){
+    $adminController->login();
 }
 
 
