@@ -49,5 +49,15 @@ class Donasi {
 
     return $this->conn->query($sql);
     }
+    public function getStats(){
 
+    $sql = "SELECT
+                COUNT(*) as total_donasi,
+                SUM(nominal) as total_uang,
+                SUM(status='confirmed') as confirmed,
+                SUM(status='pending') as pending
+            FROM $this->table";
+
+    return $this->conn->query($sql)->fetch_assoc();
+    }
 }

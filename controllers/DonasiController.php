@@ -70,5 +70,10 @@ class DonasiController {
 
     jsonResponse($data);
 }
+   public function stats(){
 
+    $stats = $this->donasi->getStats();
+
+    jsonResponse($stats);
+}
 }

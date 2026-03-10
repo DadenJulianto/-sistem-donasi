@@ -52,6 +52,13 @@ if($uri === "/api/admin/donasi" && $method === "GET"){
     $donasiController->adminList();
 }
 
+if($uri === "/api/admin/stats" && $method === "GET"){
+
+    authMiddleware();
+
+    $donasiController->stats();
+}
+
 
 /*
 jika route tidak ditemukan
