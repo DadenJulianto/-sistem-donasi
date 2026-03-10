@@ -4,7 +4,7 @@ require_once __DIR__.'/../config/database.php';
 require_once __DIR__.'/../controllers/DonasiController.php';
 require_once __DIR__.'/../helpers/response.php';
 require_once __DIR__.'/../controllers/AdminController.php';
-
+require_once __DIR__.'/../helpers/middleware.php';
 
 
 $db = (new Database())->connect();
@@ -39,6 +39,7 @@ if($uri === "/api/donasi" && $method === "GET"){
 }
 
 if($uri === "/api/donasi/confirm" && $method === "POST"){
+    authMiddleware();
     $donasiController->confirm();
 }
 if($uri === "/api/admin/login" && $method === "POST"){
